@@ -79,5 +79,5 @@ fun depthF (Node(a, children))
 
 (* ex 6.4.4 preorder *)
 fun preorder (Node(a, nil)) = [a]
-  | preorder (Node(a, t::ts)) =
-    preorder (Node(a, ts)) @ preorder t;
+  | preorder (Node(a, children)) =
+    a :: foldl (fn (child, acc) => acc @ preorder child) [] children;
