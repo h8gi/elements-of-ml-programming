@@ -11,6 +11,17 @@ val t =
 		])
 	]);
 
+val t2 =
+    Node(1, [
+	    Node(2, [Node(2, nil)]),
+	    Node(3, [
+		    Node(4, nil),
+		    Node(5, [Node(2, nil), Node(7, nil), Node(2,nil)]),
+		    Node(6, nil)
+		]),
+		Node(2, nil)
+	]);
+
 fun sum (Node(x, nil)) = x
   | sum (Node(x, t::ts)) = sum(t) + sum(Node(x, ts));
 
