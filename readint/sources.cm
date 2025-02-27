@@ -1,0 +1,8 @@
+Library
+	structure ReadInt
+	structure ReadIntEx
+is
+      readint.sml
+      readintex.sml
+      $/basis.cm
+      $/smlnj-lib.cm

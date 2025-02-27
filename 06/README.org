@@ -1,0 +1,17 @@
+* DATATYPES
+
+datatype によって定義されるのは type constructor と data constructor。
+
+#+BEGIN_SRC sml
+  datatype fruit = Apple | Pear | Grape;
+#+END_SRC
+
+=fruit= がtype constructorで、右の3つがdata constructor。
+type constructor は type variables によって parameterize できる。
+data constructor も引数を取るようにできる。
+type constructor の type variables はカンマ区切りで括弧で囲む。
+タイプパラメータのリストはtype expressionではないと理解していれば、間違って =('a * 'b)= のように書いてしまうことはないだろう。
+
+data constructor は関数のように見えるが、関数ではない。
+他の関数適用と同じに見えるが、non-expansive expression としてあつかわれるという大きな違いがある。
+パターンマッチでの分解に使われるのも関数適用とは異なる点。

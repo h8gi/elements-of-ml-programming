@@ -1,0 +1,92 @@
+top-levelのexapnsive expressionではtype variableはつかえない。
+
+non-exapnsive expressionの条件
+- constant or variable
+- function definition
+- tuple of non-expansive expressions
+- type constructor with non-expansive expression
+
+以下の3条件が全て満たされると、type variable を generalizeできない。
+
+- top levelのexpressionde
+- そのexpressionのtypeがtype variableを含んでいて
+- expansiveなexpressionである
+
+以下具体例
+
+関数適用のresult型がtype variableを持つ場合はそのtype variableはnon-generalizableになる。
+
+#+BEGIN_SRC sml
+  fun identity x = x;
+  identity(identity);
+- stdIn:19.3-19.21 Warning: type vars not generalized because of
+   value restriction are instantiated to dummy types (X1,X2,...)
+val it = fn : ?.X1 -> ?.X1
+#+END_SRC
+
+以下のようにしてconcrete typeを与えてあげれば問題ない。
+#+BEGIN_SRC sml
+  identity(identity: int -> int);
+#+END_SRC
+
+本の中では以下の例もillegalになると書いているが、non-expansive に対するtype constructorの適用なんだから問題ないはず(そして実際問題なかった)
+
+#+BEGIN_SRC sml
+  [identity, identity];
+#+END_SRC
+
+以下の例で、milletはエラーを出すが、smlnjは問題なし。top levelではないからnon-generalizableではないことは問題にならない。milletのバグかも。
+x(1)から遡って x: int -> int が導ける。
+#+BEGIN_SRC sml
+  let
+      val x = identity(identity);
+  in
+      x(1)
+  end;
+#+END_SRC
+
+そのため以下の場合はoperator and operand don't agree エラーになる。
+むしろこっちではmilletがエラーを出さなかった。generalizableかどうかの判定にバグがありそう。
+#+BEGIN_SRC sml
+  let
+      val x = identity(identity)
+  in
+      (x(1), x("a"))
+  end
+#+END_SRC
+
+いずれにせよnon-generalizableではあるので、type-variableはただ1つの型で置き換えられなければならない。
+MLはxの定義時に、xの型におけるtype-variableの解釈をgeneralizable から nongeneralizable に変換している。
+
+下のような例ではidentityの型におけるtype-variableはgeneralizableなままなので、問題がおきない。
+#+BEGIN_SRC sml
+  (identity(1), identity("a"))
+#+END_SRC
+
+** 5.3.4 The Equality Operators
+
+=== と =<>= は polymorphism を壊さない(部分的に)。
+equality typeにだったら適用できる。
+
+realを除くbasic typeはeuqlity types.
+
+以下もequality type.
+
+1. equality typeのtuple
+2. equality typeのlist
+
+ユーザ定義のdatatypeも条件を満たせばequality typeになる。
+
+nil を equal で比較した場合、そのリストは =''a list= あつかいされる。
+パターンマッチの場合はそうならない
+
+#+BEGIN_SRC sml
+   fun rev1 L =
+       if L = nil then nil
+       else rev1(tl L) @ [hd L];
+   val rev1 = fn : ''a list -> ''a list
+
+   fun rev2 nil = nil
+     | rev2 (x::xs) = rev2 xs @ [x];
+   val rev2 = fn : 'a list -> 'a list
+#+END_SRC
