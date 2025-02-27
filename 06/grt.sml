@@ -39,3 +39,7 @@ fun count x =
     in
 	helper
     end;
+
+val test_count = count 2 t; (* should be 1 *)
+val test_count2 = count 7 t; (* should be 1 *)
+val test_count3 = count 8 t; (* should be 0 *)
