@@ -16,7 +16,9 @@ val t2 =
 	    Node(2, [Node(2, nil)]),
 	    Node(3, [
 		    Node(4, nil),
-		    Node(5, [Node(2, nil), Node(7, nil), Node(2,nil)]),
+		    Node(5, [Node(2, [Node(10, nil)]),
+			     Node(7, nil),
+			     Node(2,nil)]),
 		    Node(6, nil)
 		]),
 		Node(2, nil)
@@ -51,10 +53,31 @@ fun count x =
 	helper
     end;
 
-val test_count_t_2 = count 2 t; (* should be 3 *)
-val test_count_t_7 = count 7 t; (* should be 1 *)
-val test_count_t_8 = count 8 t; (* should be 0 *)
+val test_count_t_2 = count 2 t;
+val test_count_t_7 = count 7 t;
+val test_count_t_8 = count 8 t;
 
-val test_count_t2_2 = count 2 t2; (* should be 4 *)
-val test_count_t2_7 = count 7 t2; (* should be 1 *)
-val test_count_t2_8 = count 8 t2; (* should be 0 *)
+val test_count_t2_2 = count 2 t2;
+val test_count_t2_7 = count 7 t2;
+val test_count_t2_8 = count 8 t2;
+
+fun countF x =
+    let
+	fun helper (Node(a, children)) =
+	    foldr (op +) (if a = x  then 1 else 0) (map helper children)
+    in
+	helper
+    end;
+
+(* ex 6.4.3 *)
+fun depth (Node(a, nil)) = 1
+  | depth (Node(a, t::ts)) =
+    Int.max (1+depth t, depth (Node(a, ts)));
+
+fun depthF (Node(a, children))
+    = 1 + foldr Int.max 0 (map depthF children);
+
+(* ex 6.4.4 preorder *)
+fun preorder (Node(a, nil)) = [a]
+  | preorder (Node(a, t::ts)) =
+    preorder (Node(a, ts)) @ preorder t;
