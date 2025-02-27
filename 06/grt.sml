@@ -51,6 +51,10 @@ fun count x =
 	helper
     end;
 
-val test_count = count 2 t; (* should be 1 *)
-val test_count2 = count 7 t; (* should be 1 *)
-val test_count3 = count 8 t; (* should be 0 *)
+val test_count_t_2 = count 2 t; (* should be 3 *)
+val test_count_t_7 = count 7 t; (* should be 1 *)
+val test_count_t_8 = count 8 t; (* should be 0 *)
+
+val test_count_t2_2 = count 2 t2; (* should be 4 *)
+val test_count_t2_7 = count 7 t2; (* should be 1 *)
+val test_count_t2_8 = count 8 t2; (* should be 0 *)
