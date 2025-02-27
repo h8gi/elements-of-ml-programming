@@ -91,3 +91,8 @@ fun preorderF (Node(a, children)) =
 fun preorder1 (Node(a, nil), acc) = a::acc
   | preorder1 (Node(a, t::ts), acc) =
     preorder1 (Node(a, ts), preorder1(t, acc));
+(* fixed by chat gpt *)
+fun preorderAcc (Node(a, children), acc) =
+    a::preorderChildren(children, acc)
+and preorderChildren (nil, acc) = acc
+  | preorderChildren (t::ts, acc) = preorderAcc(t, preorderChildren(ts, acc));
