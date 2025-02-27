@@ -23,5 +23,10 @@ fun lookup (x : ''a, Node(a, nil)) = x = a
     lookup(x, t) orelse lookup(x, Node(a, ts));
 
 (* ex 6.4.2 *)
-fun lookupF (x : ''a) (Node(a, children)) =
-  a = x orelse List.exists (lookupF x) children
+fun lookupF (x : ''a) =
+  let
+    fun lookupHelper (Node(a, children)) =
+      a = x orelse List.exists lookupHelper children
+  in
+    lookupHelper
+  end
