@@ -78,9 +78,16 @@ fun depthF (Node(a, children))
     = 1 + foldr Int.max 0 (map depthF children);
 
 (* ex 6.4.4 preorder *)
-fun preorder (Node(a, nil)) = [a]
-  | preorder (Node(a, children)) =
+fun preorder (Node(a, children)) =
     a :: preorderHelper children
 and preorderHelper nil = []
   | preorderHelper (child::rest) =
     preorder child @ preorderHelper rest;
+
+fun preorderF (Node(a, children)) =
+    foldl (fn (child, acc) => acc @ child) [a] (map preorderF children);
+(* ex 6.4.5 ??? *)
+(* ex 6.4.6 *)
+fun preorder1 (Node(a, nil), acc) = a::acc
+  | preorder1 (Node(a, t::ts), acc) =
+    preorder1 (Node(a, ts), preorder1(t, acc));
