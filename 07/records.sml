@@ -5,8 +5,8 @@ val Norm'sRecord = {
 };
 
 exception NotFound;
-fun getID (person : string, nil) = raise NotFound
+fun getID (_ : string, nil) = raise NotFound
   | getID (person : string, (x : {ID: int, name: string, courses: string list}) :: xs) =
-    if #name(x) = person then
-	#ID(x)
+    if # name x = person then
+	# ID x
     else getID(person, xs);
