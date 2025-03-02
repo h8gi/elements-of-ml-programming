@@ -54,3 +54,10 @@ fun tallestDeno nil = raise NotFound
 	if height > t_height then x
 	else t
     end;
+
+(* Test case for tallestDeno *)
+val dino_list = [tyranno, brachio, {name="stego", weight=3.0, height=12.0}];
+val tallest = tallestDeno dino_list;
+val test_tallest = #name tallest = "brachio";
+
+print ("Tallest dino is: " ^ #name tallest ^ "\n");
