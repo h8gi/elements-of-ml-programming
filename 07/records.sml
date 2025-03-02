@@ -18,8 +18,8 @@ fun getID (_ : string, nil) = raise NotFound
 
 fun tuition {courses=nil, ...} = 1000
   | tuition ({courses=[ _ ], ...} : student) = 2000
-  | tuition {ID=i, ...} =
-    if i>=100000 then 5000
+  | tuition {ID, ...} =
+    if ID>=100000 then 5000
     else 4000;
 
 (* Test cases for tuition function *)
