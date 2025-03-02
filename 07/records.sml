@@ -32,3 +32,10 @@ val test1 = tuition student1 = 1000;  (* No courses *)
 val test2 = tuition student2 = 2000;  (* One course *)
 val test3 = tuition student3 = 5000;  (* ID >= 100000 *)
 val test4 = tuition student4 = 4000;  (* ID < 100000 *)
+
+(* 7.1.6 ex for 7.1 *)
+(* 7.1.1 *)
+type deno = {name: string,
+	     weight: real,
+	     height: real};
+val tyranno = {name="tyranno", weight=7.0, height=20.0};
