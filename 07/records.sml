@@ -25,8 +25,8 @@ fun tuition {courses=nil, ...} = 1000
 (* Test cases for tuition function *)
 val student1 = {ID=12345, name="Alice", courses=nil};
 val student2 = {ID=67890, name="Bob", courses=["CS101"]};
-val student3 = {ID=100000, name="Charlie", courses=["EE200"]};
-val student4 = {ID=99999, name="David", courses=["ME101"]};
+val student3 = {ID=100000, name="Charlie", courses=["EE200", "MA101"]};
+val student4 = {ID=99999, name="David", courses=["ME101", "PH101"]};
 
 val test1 = tuition student1 = 1000;  (* No courses *)
 val test2 = tuition student2 = 2000;  (* One course *)
