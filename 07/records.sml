@@ -35,7 +35,8 @@ val test4 = tuition student4 = 4000;  (* ID < 100000 *)
 
 (* 7.1.6 ex for 7.1 *)
 (* 7.1.1 *)
+(* weight in tons, height in feet *)
 type deno = {name: string,
-	     weight: real,
-	     height: real};
+             weight: real,
+             height: real};
 val tyranno = {name="tyranno", weight=7.0, height=20.0};
