@@ -41,3 +41,16 @@ type deno = {name: string,
              height: real};
 val tyranno = {name="tyranno", weight=7.0, height=20.0};
 val brachio = {name="brachio", weight=80.0, height=50.0};
+#height tyranno;
+#weight brachio;
+
+(* 7.1.2 *)
+fun tallestDeno nil = raise NotFound
+  | tallestDeno [x:deno] = x
+  | tallestDeno ((x as {height,...})::xs) =
+    let
+	val t as {height=t_height,...} = tallestDeno xs
+    in
+	if height > t_height then x
+	else t
+    end;
