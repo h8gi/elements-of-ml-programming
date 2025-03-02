@@ -36,7 +36,7 @@ val test4 = tuition student4 = 4000;  (* ID < 100000 *)
 (* 7.1.6 ex for 7.1 *)
 (* 7.1.1 *)
 (* weight in tons, height in feet *)
-type deno = {name: string,
+type dino = {name: string,
              weight: real,
              height: real};
 val tyranno = {name="tyranno", weight=7.0, height=20.0};
@@ -45,17 +45,17 @@ val brachio = {name="brachio", weight=80.0, height=50.0};
 #weight brachio;
 
 (* 7.1.2 *)
-fun tallestDeno nil = raise NotFound
-  | tallestDeno [x:deno] = x
-  | tallestDeno ((x as {height,...})::xs) =
+fun tallestDino nil = raise NotFound
+  | tallestDino [x:dino] = x
+  | tallestDino ((x as {height,...})::xs) =
     let
-	val t as {height=t_height,...} = tallestDeno xs
+	val t as {height=t_height,...} = tallestDino xs
     in
 	if height > t_height then x
 	else t
     end;
 
-(* Test case for tallestDeno *)
+(* Test case for tallestDino *)
 val dino_list = [tyranno, brachio, {name="stego", weight=3.0, height=12.0}];
-val tallest = tallestDeno dino_list;
+val tallest = tallestDino dino_list;
 val test_tallest = #name tallest = "brachio";
