@@ -69,7 +69,7 @@ fun averageWeight (l : dino list) =
     end;
 (* 7.1.3 *)
 (* a. find all records with name = n *)
-fun findStudentsByName (_, nil : student list) = raise NotFound
+fun findStudentsByName (_, nil : student list) = nil
   | findStudentsByName (n, (x as {name, ...})::xs) =
     let
 	val rest = findStudentsByName (n, xs)
