@@ -59,3 +59,20 @@ fun tallestDino nil = raise NotFound
 val dino_list = [tyranno, brachio, {name="stego", weight=3.0, height=12.0}];
 val tallest = tallestDino dino_list;
 val test_tallest = #name tallest = "brachio";
+
+fun averageWeight (l : dino list) =
+    let
+	val sum = foldr (op +) 0.0 (map #weight l)
+	val n = real(length l)
+    in
+	sum/n
+    end;
+(* 7.1.3 *)
+(* a. find all records with name = n *)
+fun findStudentsByName (_, nil : student list) = raise NotFound
+  | findStudentsByName (n, (x as {name, ...})::xs) =
+    let
+	val rest = findStudentsByName (n, xs)
+    in
+	if name = n then x :: rest else rest
+    end;
