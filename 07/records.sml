@@ -89,3 +89,18 @@ val test_find2 = #ID (hd alice_list) = 12345;
 val student7 = {ID=88888, name="Carol", courses=["MA101"]};
 val carol_list = findStudentsByName ("Carol", [student7]);
 val test_find3 = #ID (hd carol_list) = 88888;
+(* 7.1.3. b *)
+fun findCoursesByID (_, nil : student list) = NONE
+  | findCoursesByID (i, (x as {ID, ...})::xs) =
+    if ID = i then SOME(#courses x) else findCoursesByID(i, xs);
+
+findCoursesByID(99999, student_list);
+(* 7.1.3. c *)
+fun findEnrolleeByCourse (_, nil : student list) = nil
+  | findEnrolleeByCourse (c, {name, courses, ...}::xs) =
+    let
+	val found = List.exists (fn elem => elem = c) courses
+	val rest = findEnrolleeByCourse(c, xs)
+    in
+	if found then name :: rest else rest
+    end;
