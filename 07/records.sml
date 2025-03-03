@@ -76,3 +76,16 @@ fun findStudentsByName (_, nil : student list) = nil
     in
 	if name = n then x :: rest else rest
     end;
+
+val student5 = {ID=55555, name="Alice", courses=["CS101"]};
+val student6 = {ID=77777, name="Bob", courses=["EE200"]};
+val student_list = [student1, student2, student3, student4, student5, student6];
+val alice_list : student list = findStudentsByName ("Alice", student_list);
+
+(* Test cases for findStudentsByName *)
+val test_find1 = length alice_list = 2;
+val test_find2 = #ID (hd alice_list) = 12345;
+
+val student7 = {ID=88888, name="Carol", courses=["MA101"]};
+val carol_list = findStudentsByName ("Carol", [student7]);
+val test_find3 = #ID (hd carol_list) = 88888;
