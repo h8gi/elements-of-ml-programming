@@ -104,3 +104,10 @@ fun findEnrolleeByCourse (_, nil : student list) = nil
     in
 	if found then name :: rest else rest
     end;
+
+(* Test cases for findEnrolleeByCourse *)
+val enrollee_cs101 = findEnrolleeByCourse("CS101", student_list);
+val test_enrollee1 = List.exists (fn x => x = "Alice") enrollee_cs101;
+val test_enrollee2 = List.exists (fn x => x = "Bob") enrollee_cs101 = false;
+val enrollee_ee200 = findEnrolleeByCourse("EE200", student_list);
+val test_enrollee3 = List.exists (fn x => x = "Bob") enrollee_ee200;
