@@ -23,4 +23,8 @@ fun insert (key : key, value : value, nil) = [(key,value)]
   | insert (key : key, value : value, (existing_key,existing_value)::rest) =
     if key = existing_key then (key,value)::rest
     else (existing_key,existing_value)::insert(key,value,rest)
+
+  (* map(f, mapping) applies f to all values in mapping, returning a new mapping *)
+  fun map (f, nil) = nil
+    | map (f, (key, value)::rest) = (key, f value) :: map (f, rest)
 end
