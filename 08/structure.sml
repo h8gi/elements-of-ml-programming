@@ -27,4 +27,8 @@ fun insert (key : key, value : value, nil) = [(key,value)]
   (* map(f, mapping) applies f to all values in mapping, returning a new mapping *)
   fun map (f, nil) = nil
     | map (f, (key, value)::rest) = (key, f value) :: map (f, rest)
+
+  (* fold(f, acc, mapping) folds the mapping with function f and initial value acc *)
+  fun fold (f, acc, nil) = acc
+    | fold (f, acc, (key, value)::rest) = fold (f, f(key, value, acc), rest)
 end
