@@ -1,14 +1,14 @@
 structure Mapping = struct
-  exception NotFound
+exception NotFound
 
-  (* type of key *)
-  type key = string
+(* type of key *)
+type key = string
 
-  (* type of value *)
-  type value = int
+(* type of value *)
+type value = int
 
-  (* create the empty mapping *)
-  val create : (key * value) list = nil
+(* create the empty mapping *)
+val create : (key * value) list = nil
 
 (* lookup(key, mapping) finds the range value r such that
    (key,r) is a pair in mapping *)
@@ -22,6 +22,6 @@ fun lookup (_, nil) = raise NotFound
 fun insert (key : key, value : value, nil) = [(key,value)]
   | insert (key : key, value : value, (existing_key,existing_value)::rest) =
     case key = existing_key of
-      true => (key,value)::rest
-    | false => (existing_key,existing_value)::insert(key,value,rest)
+	true => (key,value)::rest
+      | false => (existing_key,existing_value)::insert(key,value,rest)
 end
