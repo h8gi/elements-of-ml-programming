@@ -15,7 +15,7 @@ val create : (key * value) list = nil
 fun lookup (_, nil) = raise NotFound
   | lookup (key, (existing_key, value)::rest) =
     if key = existing_key then value
-    else lookup(key, rest)
+    else lookup (key, rest)
 
 (* insert(key, value, mapping) puts (key, value) in mapping and removes
    any other pair (key,s) that was present in mapping *)
@@ -25,10 +25,10 @@ fun insert (key : key, value : value, nil) = [(key,value)]
     else (existing_key,existing_value)::insert(key,value,rest)
 
   (* map(f, mapping) applies f to all values in mapping, returning a new mapping *)
-  fun map (f, nil) = nil
+  fun map (_, nil) = nil
     | map (f, (key, value)::rest) = (key, f value) :: map (f, rest)
 
   (* fold(f, acc, mapping) folds the mapping with function f and initial value acc *)
-  fun fold (f, acc, nil) = acc
+  fun fold (_, acc, nil) = acc
     | fold (f, acc, (key, value)::rest) = fold (f, f(key, value, acc), rest)
 end
