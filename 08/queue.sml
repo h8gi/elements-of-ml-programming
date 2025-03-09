@@ -1,3 +1,4 @@
+(* exercise 8.2.7 *)
 structure Queue = struct
 exception EmptyQueue
 

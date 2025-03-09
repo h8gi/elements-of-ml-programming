@@ -1,11 +1,5 @@
 Library
-	structure Mapping
-	structure SiMapping
-	structure Tree
-	structure SimpleTree
-	structure Stack
-	structure Queue
-	structure PairQueue
+	source(-)
 is
 	structure.sml
 	tree.sml
