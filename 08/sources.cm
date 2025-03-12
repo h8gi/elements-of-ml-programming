@@ -5,5 +5,9 @@ is
 	tree.sml
 	stack.sml
 	queue.sml
+	bst.sml
+	string_bst.sml
+	triple_bst.sml
+	sim.sml
 	$/basis.cm
 	$/smlnj-lib.cm

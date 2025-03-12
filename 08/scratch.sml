@@ -13,3 +13,5 @@ val t3 = SimpleTree.build(1, [
 			     SimpleTree.build(4, nil)
 			 ]);
 val t4 = SimpleTree.find(1, t3);
+
+val bst1 = StringBST.create;

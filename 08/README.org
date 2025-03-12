@@ -1,0 +1,32 @@
+* 8. ENCAPSULATION AND THE ML MODULE SYSTEM
+
+** 8.3 Functors
+
+<2025-03-09 日>
+今まで読んだ他の本ではfunctorはあまり触れてなかったので、ここはメモを残す。
+
+<2025-03-11 火>
+signature内のtypeは実装においてはdatatypeであり得る。
+
+functorの適用は以下のような形になる。equalの直前に =:<signature>= を入れることもできる。
+#+BEGIN_SRC sml
+  structure <NewStructureNAme> = <functorName>(<structureArgument>)
+#+END_SRC
+
+*** 8.3.3 More General Forms for Functor Parameters and Arguments
+
+functorの引数にはstructure名でなくinlineのstructを書くことも可能。
+=structure= を明示する書き方もある。
+#+BEGIN_SRC
+  functor <identifier>(structure S1:Sig1 and ... and Sn:Sign)
+	= <structure definition>
+#+END_SRC
+
+functorの引数は、signature内で宣言可能なものと同一である。(typeやval、exceptionなど)
+parameterを渡すときにはspecification keyword(structure, type, valなど)を引数名のようにして使う。
+#+BEGIN_SRC sml
+  structure Bar = Foo(structure I = Int; structure R = Real)
+  structure Bar = Foo(structure I = Int and R = Real)
+  structure Bar = Foo(structure I = int; structure R = Real; val x = 2)
+  structure Bar = Foo(structure I = int and R = Real; val x = 2)
+#+END_SRC
