@@ -15,3 +15,9 @@ val t3 = SimpleTree.build(1, [
 val t4 = SimpleTree.find(1, t3);
 
 val bst1 = StringBST.create;
+
+(* MisspellSet の動作確認 *)
+val misspellSet = MisspellSet.create;
+val misspellSet = MisspellSet.insert("hello", misspellSet);
+val misspellSet = MisspellSet.insert("hallo", misspellSet);
+val similarWords = MisspellSet.findSim("helo", misspellSet);
