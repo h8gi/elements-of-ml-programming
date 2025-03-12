@@ -20,4 +20,4 @@ val bst1 = StringBST.create;
 val misspellSet = MisspellSet.create;
 val misspellSet = MisspellSet.insert("hello", misspellSet);
 val misspellSet = MisspellSet.insert("hallo", misspellSet);
-val similarWords = MisspellSet.findSim("helo", misspellSet);
+val similarWords = MisspellSet.findSim("helli", misspellSet);
