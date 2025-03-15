@@ -28,23 +28,20 @@ val similarWords = MisspellSet.findSim("helli", misspellSet);
 val hash_table = Hash100.create (); (* ハッシュテーブルの作成 *)
 
 (* insert の動作確認 *)
-val hash_table = Hash100.insert ("apple", hash_table);
-val hash_table = Hash100.insert ("banana", hash_table);
-val hash_table = Hash100.insert ("cherry", hash_table);
+val _ = Hash100.insert ("apple", hash_table);
+val _ = Hash100.insert ("banana", hash_table);
+val _ = Hash100.insert ("cherry", hash_table);
 
 (* lookup の動作確認 *)
 val has_apple = Hash100.lookup ("apple", hash_table); (* true が返るはず *)
 val has_grape = Hash100.lookup ("grape", hash_table); (* false が返るはず *)
 
 (* delete の動作確認 *)
-val hash_table = Hash100.delete ("banana", hash_table);
+val _ = Hash100.delete ("banana", hash_table);
 val has_banana = Hash100.lookup ("banana", hash_table); (* false が返るはず *)
 val has_cherry = Hash100.lookup ("cherry", hash_table); (* true が返るはず *)
-
-val size = Hash100.size(hash_table); (* サイズの確認 *)
 
 print ("has_apple: " ^ Bool.toString(has_apple) ^ "\n");
 print ("has_grape: " ^ Bool.toString(has_grape) ^ "\n");
 print ("has_banana: " ^ Bool.toString(has_banana) ^ "\n");
 print ("has_cherry: " ^ Bool.toString(has_cherry) ^ "\n");
-print ("size: " ^ Int.toString(size) ^ "\n");
