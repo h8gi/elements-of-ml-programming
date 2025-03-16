@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-03-11 火 23:21 -->
+<!-- 2025-03-15 土 23:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -200,11 +200,16 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orged0a9cd">1. 8. ENCAPSULATION AND THE ML MODULE SYSTEM</a>
+<li><a href="#org53f839b">1. 8. ENCAPSULATION AND THE ML MODULE SYSTEM</a>
 <ul>
-<li><a href="#org116c4c7">1.1. 8.3 Functors</a>
+<li><a href="#org3114b6c">1.1. 8.3 Functors</a>
 <ul>
-<li><a href="#orgd6912fe">1.1.1. 8.3.3 More General Forms for Functor Parameters and Arguments</a></li>
+<li><a href="#orgcc2205c">1.1.1. 8.3.3 More General Forms for Functor Parameters and Arguments</a></li>
+</ul>
+</li>
+<li><a href="#orgd333fdc">1.2. 8.4 Sharings</a>
+<ul>
+<li><a href="#orge6b998c">1.2.1. 8.4.1 Sharing Specifications</a></li>
 </ul>
 </li>
 </ul>
@@ -212,12 +217,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orged0a9cd" class="outline-2">
-<h2 id="orged0a9cd"><span class="section-number-2">1.</span> 8. ENCAPSULATION AND THE ML MODULE SYSTEM</h2>
+<div id="outline-container-org53f839b" class="outline-2">
+<h2 id="org53f839b"><span class="section-number-2">1.</span> 8. ENCAPSULATION AND THE ML MODULE SYSTEM</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org116c4c7" class="outline-3">
-<h3 id="org116c4c7"><span class="section-number-3">1.1.</span> 8.3 Functors</h3>
+<div id="outline-container-org3114b6c" class="outline-3">
+<h3 id="org3114b6c"><span class="section-number-3">1.1.</span> 8.3 Functors</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">&lt;2025-03-09 日&gt;</span></span>
@@ -237,8 +242,8 @@ functorの適用は以下のような形になる。equalの直前に <code>:&lt
 </pre>
 </div>
 </div>
-<div id="outline-container-orgd6912fe" class="outline-4">
-<h4 id="orgd6912fe"><span class="section-number-4">1.1.1.</span> 8.3.3 More General Forms for Functor Parameters and Arguments</h4>
+<div id="outline-container-orgcc2205c" class="outline-4">
+<h4 id="orgcc2205c"><span class="section-number-4">1.1.1.</span> 8.3.3 More General Forms for Functor Parameters and Arguments</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 functorの引数にはstructure名でなくinlineのstructを書くことも可能。
@@ -249,6 +254,40 @@ functorの引数にはstructure名でなくinlineのstructを書くことも可�
         = &lt;structure definition&gt;
 </pre>
 </div>
+
+<p>
+functorの引数は、signature内で宣言可能なものと同一である。(typeやval、exceptionなど)
+parameterを渡すときにはspecification keyword(structure, type, valなど)を引数名のようにして使う。
+</p>
+<div class="org-src-container">
+<pre class="src src-sml">structure Bar = Foo(structure I = Int; structure R = Real)
+structure Bar = Foo(structure I = Int and R = Real)
+structure Bar = Foo(structure I = int; structure R = Real; val x = 2)
+structure Bar = Foo(structure I = int and R = Real; val x = 2)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd333fdc" class="outline-3">
+<h3 id="orgd333fdc"><span class="section-number-3">1.2.</span> 8.4 Sharings</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+読む前の理解:
+異なる場所に出現しているが実際は同じであるはずのものを、これらは同じであると宣言する機能
+</p>
+</div>
+<div id="outline-container-orge6b998c" class="outline-4">
+<h4 id="orge6b998c"><span class="section-number-4">1.2.1.</span> 8.4.1 Sharing Specifications</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+sharing specificationはsignatureの中に現れる。
+</p>
+<div class="org-src-container">
+<pre class="src src-sml">sharing type &lt;type&gt; = &lt;type&gt; = ... = &lt;type&gt;
+sharing &lt;structure&gt; = &lt;sturecutre&gt; = ... = &lt;structure&gt;
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -256,7 +295,7 @@ functorの引数にはstructure名でなくinlineのstructを書くことも可�
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: yagi</p>
-<p class="date">Created: 2025-03-11 火 23:21</p>
+<p class="date">Created: 2025-03-15 土 23:44</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

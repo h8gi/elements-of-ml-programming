@@ -30,3 +30,27 @@ parameterを渡すときにはspecification keyword(structure, type, valなど)�
   structure Bar = Foo(structure I = int; structure R = Real; val x = 2)
   structure Bar = Foo(structure I = int and R = Real; val x = 2)
 #+END_SRC
+
+** 8.4 Sharings
+
+読む前の理解:
+異なる場所に出現しているが実際は同じであるはずのものを、これらは同じであると宣言する機能
+
+*** 8.4.1 Sharing Specifications
+
+sharing specificationはsignatureの中に現れる。
+#+BEGIN_SRC sml
+  sharing type <type> = <type> = ... = <type>
+  sharing <structure> = <sturecutre> = ... = <structure>
+#+END_SRC
+
+type sharingが基本。
+structure sharingは複数のstructure内のidenticalなtype全部をsharingする略記法。
+structure同士がequalであるという意味ではない。
+
+*** 8.4.2 Substructures
+
+signature内でstructureを宣言しておける。その場合substructureのsigは必須。
+structure内でstructureを定義することもできる。その場合sigはなくても良い。(定義や既存のstructureから導出できるので)
+
+*** 8.4.3 Sharing of Types
