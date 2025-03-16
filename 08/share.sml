@@ -56,17 +56,13 @@ struct
   datatype tree = Tree of elt * tree list
   fun build (x, children) = Tree (x, children)
   fun lookup (x, Tree(y, children)) =
-    if Element.similar (x, y) then
-      true
-    else
+      Element.similar (x, y) orelse
       let
-        fun lookup_children [] = false
-          | lookup_children (child::rest_children) =
-            if lookup (x, child) then
-              true
-            else
-              lookup_children rest_children
+          fun lookup_children [] = false
+            | lookup_children (child::rest_children) =
+               lookup (x, child) orelse
+	       lookup_children rest_children
       in
-        lookup_children children
+          lookup_children children
       end
 end
