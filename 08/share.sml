@@ -48,3 +48,25 @@ fun lookup (_, Empty) = false
     x=y orelse
     (lookup (x, left)) orelse (lookup (x, right))
 end
+
+structure SharedTree : TREE =
+struct
+  type elt = string
+  structure Element = S
+  datatype tree = Tree of elt * tree list
+  fun build (x, children) = Tree (x, children)
+  fun lookup (x, Tree(y, children)) =
+    if Element.similar (x, y) then
+      true
+    else
+      let
+        fun lookup_children [] = false
+          | lookup_children (child::rest_children) =
+            if lookup (x, child) then
+              true
+            else
+              lookup_children rest_children
+      in
+        lookup_children children
+      end
+end
