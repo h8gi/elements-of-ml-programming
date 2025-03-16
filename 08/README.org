@@ -54,3 +54,4 @@ signature内でstructureを宣言しておける。その場合substructureのsi
 structure内でstructureを定義することもできる。その場合sigはなくても良い。(定義や既存のstructureから導出できるので)
 
 *** 8.4.3 Sharing of Types
+[[./share.sml]] を参照。

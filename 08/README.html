@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-03-15 土 23:44 -->
+<!-- 2025-03-16 日 23:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -200,16 +200,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org53f839b">1. 8. ENCAPSULATION AND THE ML MODULE SYSTEM</a>
+<li><a href="#org4d92511">1. 8. ENCAPSULATION AND THE ML MODULE SYSTEM</a>
 <ul>
-<li><a href="#org3114b6c">1.1. 8.3 Functors</a>
+<li><a href="#org912af0b">1.1. 8.3 Functors</a>
 <ul>
-<li><a href="#orgcc2205c">1.1.1. 8.3.3 More General Forms for Functor Parameters and Arguments</a></li>
+<li><a href="#org764c5bc">1.1.1. 8.3.3 More General Forms for Functor Parameters and Arguments</a></li>
 </ul>
 </li>
-<li><a href="#orgd333fdc">1.2. 8.4 Sharings</a>
+<li><a href="#org5c54e99">1.2. 8.4 Sharings</a>
 <ul>
-<li><a href="#orge6b998c">1.2.1. 8.4.1 Sharing Specifications</a></li>
+<li><a href="#orgc525368">1.2.1. 8.4.1 Sharing Specifications</a></li>
+<li><a href="#org37bb319">1.2.2. 8.4.2 Substructures</a></li>
+<li><a href="#org223c90d">1.2.3. 8.4.3 Sharing of Types</a></li>
 </ul>
 </li>
 </ul>
@@ -217,12 +219,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org53f839b" class="outline-2">
-<h2 id="org53f839b"><span class="section-number-2">1.</span> 8. ENCAPSULATION AND THE ML MODULE SYSTEM</h2>
+<div id="outline-container-org4d92511" class="outline-2">
+<h2 id="org4d92511"><span class="section-number-2">1.</span> 8. ENCAPSULATION AND THE ML MODULE SYSTEM</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org3114b6c" class="outline-3">
-<h3 id="org3114b6c"><span class="section-number-3">1.1.</span> 8.3 Functors</h3>
+<div id="outline-container-org912af0b" class="outline-3">
+<h3 id="org912af0b"><span class="section-number-3">1.1.</span> 8.3 Functors</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">&lt;2025-03-09 日&gt;</span></span>
@@ -242,8 +244,8 @@ functorの適用は以下のような形になる。equalの直前に <code>:&lt
 </pre>
 </div>
 </div>
-<div id="outline-container-orgcc2205c" class="outline-4">
-<h4 id="orgcc2205c"><span class="section-number-4">1.1.1.</span> 8.3.3 More General Forms for Functor Parameters and Arguments</h4>
+<div id="outline-container-org764c5bc" class="outline-4">
+<h4 id="org764c5bc"><span class="section-number-4">1.1.1.</span> 8.3.3 More General Forms for Functor Parameters and Arguments</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 functorの引数にはstructure名でなくinlineのstructを書くことも可能。
@@ -269,16 +271,16 @@ structure Bar = Foo(structure I = int and R = Real; val x = 2)
 </div>
 </div>
 </div>
-<div id="outline-container-orgd333fdc" class="outline-3">
-<h3 id="orgd333fdc"><span class="section-number-3">1.2.</span> 8.4 Sharings</h3>
+<div id="outline-container-org5c54e99" class="outline-3">
+<h3 id="org5c54e99"><span class="section-number-3">1.2.</span> 8.4 Sharings</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 読む前の理解:
 異なる場所に出現しているが実際は同じであるはずのものを、これらは同じであると宣言する機能
 </p>
 </div>
-<div id="outline-container-orge6b998c" class="outline-4">
-<h4 id="orge6b998c"><span class="section-number-4">1.2.1.</span> 8.4.1 Sharing Specifications</h4>
+<div id="outline-container-orgc525368" class="outline-4">
+<h4 id="orgc525368"><span class="section-number-4">1.2.1.</span> 8.4.1 Sharing Specifications</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 sharing specificationはsignatureの中に現れる。
@@ -288,6 +290,29 @@ sharing specificationはsignatureの中に現れる。
 sharing &lt;structure&gt; = &lt;sturecutre&gt; = ... = &lt;structure&gt;
 </pre>
 </div>
+
+<p>
+type sharingが基本。
+structure sharingは複数のstructure内のidenticalなtype全部をsharingする略記法。
+structure同士がequalであるという意味ではない。
+</p>
+</div>
+</div>
+<div id="outline-container-org37bb319" class="outline-4">
+<h4 id="org37bb319"><span class="section-number-4">1.2.2.</span> 8.4.2 Substructures</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+signature内でstructureを宣言しておける。その場合substructureのsigは必須。
+structure内でstructureを定義することもできる。その場合sigはなくても良い。(定義や既存のstructureから導出できるので)
+</p>
+</div>
+</div>
+<div id="outline-container-org223c90d" class="outline-4">
+<h4 id="org223c90d"><span class="section-number-4">1.2.3.</span> 8.4.3 Sharing of Types</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+<a href="./share.sml">./share.sml</a> を参照。
+</p>
 </div>
 </div>
 </div>
@@ -295,7 +320,7 @@ sharing &lt;structure&gt; = &lt;sturecutre&gt; = ... = &lt;structure&gt;
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: yagi</p>
-<p class="date">Created: 2025-03-15 土 23:44</p>
+<p class="date">Created: 2025-03-16 日 23:29</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

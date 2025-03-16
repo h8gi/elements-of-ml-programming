@@ -30,7 +30,7 @@ signature ALLTREES = sig
 end
 
 
-structure S : ELEMENT =
+structure S1 : ELEMENT =
 struct
 type element = string
 fun similar (x, y) = x = y
@@ -39,7 +39,7 @@ end
 structure SharedBTree : BTREE =
 struct
 type elt = string
-structure Element = S
+structure Element = S1
 datatype btree = Empty | Node of elt * btree * btree
 fun leaf x = Node (x, Empty, Empty)
 fun build (x, t1, t2) = Node(x, t1, t2)
@@ -49,10 +49,16 @@ fun lookup (_, Empty) = false
     (lookup (x, left)) orelse (lookup (x, right))
 end
 
+structure S2 : ELEMENT =
+struct
+type element = string
+fun similar (x, y) = x = y
+end
+
 structure SharedTree : TREE =
 struct
   type elt = string
-  structure Element = S
+  structure Element = S2
   datatype tree = Tree of elt * tree list
   fun build (x, children) = Tree (x, children)
   fun lookup (x, Tree(y, children)) =
@@ -65,4 +71,10 @@ struct
       in
           lookup_children children
       end
+end
+
+structure AllTrees : ALLTREES =
+struct
+structure Btree = SharedBTree
+structure Tree = SharedTree
 end
